@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Atlas Catalog
 
 Mini SaaS multi-tenant de protocolos clínicos com um agente de IA que responde perguntas de clientes consultando o catálogo real de cada empresa no MongoDB. A demo usa duas clínicas fictícias (Clínica Aurora e Instituto Horizonte), cada uma com 11 protocolos próprios (emagrecimento, saúde hormonal, nutrição, longevidade, performance). Backend em Express + TypeScript + MongoDB, frontend em React + TypeScript.
