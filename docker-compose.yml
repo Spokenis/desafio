@@ -1,0 +1,36 @@
+name: atlas-catalog
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/atlas-catalog
+      JWT_SECRET: ${JWT_SECRET:-local-docker-secret}
+      CLIENT_URL: http://localhost:5174,http://localhost:5173
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.8-flash}
+    depends_on:
+      - mongo
+    ports:
+      - "4000:4000"
+
+  client:
+    build: ./client
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "5174:4173"
+
+volumes:
+  mongo_data:
